@@ -1,7 +1,6 @@
 from flask import Flask, jsonify # importing the Flask class from flask library
 import agent_collector as collector
 
-
 app = Flask(__name__)    # initiating the Flask app object 
 app.config['JSON_SORT_KEYS'] = False #disables auto ordering keys
 
@@ -33,4 +32,5 @@ def call_collector(resource):
                 {'message': 'Error : Unexpected key requested (use cpu/memory/network)'}
         )
 if __name__ == '__main__':
-    app.run(debug=True)
+    context = ('local.crt', 'local.key')
+    app.run(debug=True, ssl_context='adhoc', host='0.0.0.0')

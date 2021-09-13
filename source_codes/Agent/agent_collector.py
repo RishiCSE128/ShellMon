@@ -18,7 +18,7 @@ def run_util_collection(exit_iface, timer=1):
                 'node_util' : node_util
         }
 
-    pp.pprint(temp)  # debug    
+    #pp.pprint(temp)  # debug    
     return temp       
 
 #debug
