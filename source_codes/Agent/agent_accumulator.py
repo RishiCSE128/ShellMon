@@ -1,4 +1,5 @@
 import psutil as ps
+import time
 import pprint
 
 
@@ -45,7 +46,9 @@ def get_iface_info():
     return nic_result
 
 def get_util():
-    print()
+    '''
+    creates a node_util data structure accumulating all node util information
+    '''
     node_util = {
         'cpu' : {
             'util': get_cpu_util(),
@@ -55,18 +58,18 @@ def get_util():
         'memory': get_mem_info(),
         'network': get_iface_info()
     }
-    print(node_util)
+    #print(node_util)    #debug
     return node_util 
 
-
+'''
 def main():
-    pp = pprint.PrettyPrinter(indent=2)
-    pp.pprint(get_util())
+    #pp = pprint.PrettyPrinter(indent=2)
+    #pp.pprint(get_util())
 
 
 main()
 
-'''
+
 if __name__ == '__main__':
     main()
 '''
