@@ -1,0 +1,6 @@
+Sep 13 18:17:01.022 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Sep 13 18:17:01.023 HYPERVISOR: Started on IP = localhost, TCP port = 60729.
+Sep 13 18:17:01.140 HYPERVISOR: exec_cmd: hypervisor version 
+Sep 13 18:17:01.141 HYPERVISOR: exec_cmd: hypervisor working_dir C:\Users\sapta\Documents\git\ShellMon\source_codes\Test topology\Test_topo\project-files\dynamips 
+Sep 13 18:17:01.150 GENERAL: working_dir=C:\Users\sapta\Documents\git\ShellMon\source_codes\Test topology\Test_topo\project-files\dynamips
+Sep 13 18:17:01.151 HYPERVISOR: exec_cmd: ethsw create Switch1 
