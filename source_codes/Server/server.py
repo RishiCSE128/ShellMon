@@ -8,7 +8,7 @@ import json
 import sqlalchemy
 
 host = {
-    'ip': '192.168.1.98',
+    'ip': '192.168.1.97',
     'port': 5000
 }
 
