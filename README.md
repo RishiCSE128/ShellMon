@@ -1,5 +1,5 @@
 # ShellMon
-Centralised Resource Monitor
+Centralised Telemetry Management API (_Under Dev_)
 
 ![](figs/presentation/Slide2.PNG)
 ![](figs/presentation/Slide3.PNG)
