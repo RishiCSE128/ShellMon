@@ -1,2 +1,5 @@
-host_ip, port, username, passord, util_type
-127.0.0.1,5000,rishi,password,all
+host_ip,port,username,passord,util_type,exit_iface
+192.168.0.104,5000,rishi,password,all,wlan0
+192.168.0.106,5000,rishi,password,all,wlan0
+192.168.0.101,5000,rishi,password,all,wlan0
+192.168.0.107,5000,rishi,password,all,wlan0

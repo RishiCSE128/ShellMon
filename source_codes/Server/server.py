@@ -1,18 +1,15 @@
-import os
+import subprocess
 import time
-from flask.wrappers import Response
 import requests 
 import pprint
 import sqlite3
 import json
-import sqlalchemy
-
-host = {
-    'ip': '192.168.1.97',
-    'port': 5000
-}
+import pandas as pd 
+import threading
+import os
 
 pp =pprint.PrettyPrinter(indent=2)
+lock = threading.Lock()
 
 def screen_clear():
    # for mac and linux(here, os.name is 'posix')
@@ -33,7 +30,9 @@ def fetch_request(host: dict , conn, timer=1):
 
     while True:
         try:
-            response = requests.get(f"https://{host['ip']}:{host['port']}/node_util/all",verify=False)
+            response = requests.get(f"https://{host['host_ip']}:{host['port']}/node_util/{host['util_type']}/{host['exit_iface']}",
+                                    verify=False
+                        )
             #response = requests.get('https://192.168.1.98:5000/node_util/all',verify=False)
             #print(response.content)
             #pp.pprint(response.json())
@@ -120,6 +119,29 @@ def db_insert(connection, util,iface):
 def main():
     con = sqlite3.connect('local_db_2.db')
     db_init(connection=con)
-    fetch_request(host=host, conn=con)
+
+    #reading the host file
+    workinf_dir = subprocess.run(['pwd'], 
+                                capture_output=True,
+                                text=True, 
+                                check=True,
+                                shell=True
+                    ).stdout.replace('\n','')
+    
+    hosts_dict = pd.read_csv(f'{workinf_dir}/source_codes/Server/hosts.csv').transpose().to_dict()
+    
+    #polulating the hosts list
+    hosts=[]
+    for k in hosts_dict.keys():
+        hosts.append(hosts_dict[k])
+
+    thread_pool = [] 
+
+    for host in hosts:
+        print(host)
+        thread_pool.append( threading.Thread(target=fetch_request, args=(host,con)) )
+        print(f"Startung SSL thread for {host['username']}@{host['host_ip']}:{host['port']} --> {host['exit_iface']}")
+        thread_pool[-1].start() 
+        thread_pool[-1].join()
 
 main()
