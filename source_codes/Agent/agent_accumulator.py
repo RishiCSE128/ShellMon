@@ -22,26 +22,28 @@ def get_iface_info():
         stat  = ps.net_if_stats()[iface]     # stat : state, duplex, speed, mtu
         addr =  ps.net_if_addrs()[iface]     # addr : ip, mask, mac
         count = ps.net_io_counters(pernic=True)[iface]  # counter : 
-
-        nic_result[iface] = {
-            'stats': {
-                'state' : stat[0],
-                'duplex' : stat[1],
-                'speed' : stat[2],
-                'mtu': stat[3]
-            },
-            'addr': {
-                'mac' : addr[0][1],
-                'ip4' : addr[1][1],
-                'mask': addr[1][2]
-            },
-            'counter' : {
-                'byte' : { 'tx' : count[0], 'rx' : count[1]},
-                'packet' : { 'tx' : count[2], 'rx' : count[3]},
-                'error' : {'tx' : count[5], 'rx' : count[4]},
-                'drop' : { 'tx' : count[7], 'rx' : count[6] }
+        try:
+            nic_result[iface] = {
+                'stats': {
+                    'state' : stat[0],
+                    'duplex' : stat[1],
+                    'speed' : stat[2],
+                    'mtu': stat[3]
+                },
+                'addr': {
+                    'mac' : addr[0][1],
+                    'ip4' : addr[1][1],
+                    'mask': addr[1][2]
+                },
+                'counter' : {
+                    'byte' : { 'tx' : count[0], 'rx' : count[1]},
+                    'packet' : { 'tx' : count[2], 'rx' : count[3]},
+                    'error' : {'tx' : count[5], 'rx' : count[4]},
+                    'drop' : { 'tx' : count[7], 'rx' : count[6] }
+                }
             }
-        }
+        except:
+            pass    # interface without any of the above information will be ommited 
 
     return nic_result
 

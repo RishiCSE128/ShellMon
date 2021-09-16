@@ -9,23 +9,23 @@ app.config['JSON_SORT_KEYS'] = False #disables auto ordering keys
 def hello():       #method for the associated endpoint 
     return 'hello world'
 
-@app.route("/node_util/<resource>")    #creating endpoint
-def call_collector(resource):     
+@app.route("/node_util/<resource>/<exit_if>")    #creating endpoint
+def call_collector(resource, exit_if):     
     if resource.lower() ==  'all':
         return jsonify(
-                collector.run_util_collection(exit_iface='Wi-Fi')
+                collector.run_util_collection(exit_iface = exit_if)
         )
     elif resource.lower() == 'cpu':
         return jsonify(
-                collector.run_util_collection(exit_iface='Wi-Fi')['node_util']['cpu']
+                collector.run_util_collection(exit_iface= exit_if )['node_util']['cpu']
         )
     elif resource.lower() == 'memory':
         return jsonify(
-                collector.run_util_collection(exit_iface='Wi-Fi')['node_util']['memory']
+                collector.run_util_collection(exit_iface= exit_if )['node_util']['memory']
         )
     elif resource.lower() == 'network':
         return jsonify(
-                collector.run_util_collection(exit_iface='Wi-Fi')['node_util']['network']
+                collector.run_util_collection(exit_iface= exit_if )['node_util']['network']
         )
     else:
          return jsonify(
