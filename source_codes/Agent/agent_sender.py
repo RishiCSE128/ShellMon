@@ -7,7 +7,12 @@ app.config['JSON_SORT_KEYS'] = False #disables auto ordering keys
 
 @app.route("/")    #creating endpoint
 def hello():       #method for the associated endpoint 
-    return 'hello world'
+    banner = '''
+        <h1> Welcome to ShellMon </h1>
+        <br>
+        Endpoint : /node_util/{cpu | memory | network | all} / {exit_interface}    
+    '''
+    return banner 
 
 @app.route("/node_util/<resource>/<exit_if>")    #creating endpoint
 def call_collector(resource, exit_if):     
